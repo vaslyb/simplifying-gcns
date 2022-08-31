@@ -1,0 +1,4 @@
+name: sgc_3
+channels:
+  - defaults
+prefix: /home/vaslyb/anaconda3/envs/sgc_3
