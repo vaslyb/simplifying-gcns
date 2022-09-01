@@ -78,13 +78,9 @@ dependencies:
     - jinja2==3.1.2
     - joblib==1.1.0
     - markupsafe==2.1.1
-    - networkx==2.8.6
-    - pandas==1.4.3
     - pyparsing==3.0.9
-    - python-dateutil==2.8.2
-    - pytz==2022.2.1
     - scikit-learn==1.1.2
-    - scipy==1.9.0
+    - scipy==1.9.1
     - threadpoolctl==3.1.0
     - torch-cluster==1.6.0
     - torch-geometric==2.1.0.post1
@@ -92,4 +88,4 @@ dependencies:
     - torch-sparse==0.6.15
     - torch-spline-conv==1.2.1
     - tqdm==4.64.0
-prefix: /home/vaslyb/anaconda3/envs/sgc_2
+prefix: /home/vaslyb/anaconda3/envs/pyg_sgc
