@@ -1,4 +1,4 @@
-name: sgc_3
+name: dgl_sgc
 channels:
   - defaults
 prefix: /home/vaslyb/anaconda3/envs/sgc_3
