@@ -1,1 +1,1 @@
-*Simplifying-Graph-Convolutional-Networks-Reproduction
+**Simplifying-Graph-Convolutional-Networks-Reproduction
