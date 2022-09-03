@@ -1,18 +1,18 @@
 import os.path as osp
-import argparser
+import argparse
 
 from ogb.nodeproppred import PygNodePropPredDataset
 
 import torch
 import torch.nn.functional as F
 
-from torch_geometric.nn import SGConv
+from torch_geometric.nn import SGConv, GCNConv
 
 dataset = PygNodePropPredDataset(name = 'ogbn-arxiv')
 split_idx = dataset.get_idx_split()
 train_idx, valid_idx, test_idx = split_idx["train"], split_idx["valid"], split_idx["test"]
 data = dataset[0]
-
+print(data)
 train_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
 valid_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
 test_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
@@ -62,7 +62,7 @@ class GCN(torch.nn.Module):
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 if(args.model=="SGC"):
     model, data = SGC().to(device), data.to(device)
-elif(args.model="GCN");
+elif(args.model=="GCN"):
     model, data = GCN().to(device), data.to(device)
 
 train_mask = train_mask.to(device)
@@ -73,17 +73,17 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.2, weight_decay=0.005)
 def train():
     model.train()
     optimizer.zero_grad()
-    if(args.model="SGC"):
+    if(args.model=="SGC"):
         F.nll_loss(model()[train_mask], torch.flatten(data.y)[train_mask]).backward()
-    elif(args.model="GCN"):
+    elif(args.model=="GCN"):
         F.nll_loss(model(data)[train_mask], torch.flatten(data.y)[train_mask]).backward()
     optimizer.step()
 
 def test():
     model.eval()
-    if(args.model="SGC"):
+    if(args.model=="SGC"):
         logits, accs = model(), []
-    elif(args.model="GCN"):
+    elif(args.model=="GCN"):
         logits, accs = model(data), []
     for mask in train_mask,valid_mask,test_mask:
         pred = logits[mask].max(1)[1]
