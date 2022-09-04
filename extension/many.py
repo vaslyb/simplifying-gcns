@@ -8,14 +8,12 @@ from torch_geometric.nn import SGConv, GCNConv
 
 from sklearn.model_selection import train_test_split
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='facebook',
                     choices=['reddit', 'flickr','facebook','github','twitch','deezer'])
 parser.add_argument('--model', type=str, default='GCN',
                     choices=['GCN','SGC'])
 args = parser.parse_args()
-
 
 if(args.dataset == "facebook"):
     dataset = FacebookPagePage("../dataset/facebook")

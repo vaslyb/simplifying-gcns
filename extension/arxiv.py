@@ -12,7 +12,7 @@ dataset = PygNodePropPredDataset(name = 'ogbn-arxiv')
 split_idx = dataset.get_idx_split()
 train_idx, valid_idx, test_idx = split_idx["train"], split_idx["valid"], split_idx["test"]
 data = dataset[0]
-print(data)
+
 train_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
 valid_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
 test_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
@@ -21,8 +21,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default='GCN',
                     choices=['GCN', 'SGC'])
 args = parser.parse_args()
-
-
 
 for position in train_idx.numpy():
     train_mask[position] = True
@@ -57,7 +55,6 @@ class GCN(torch.nn.Module):
         x = self.conv2(x, edge_index)
         x = self.conv3(x, edge_index)
         return F.log_softmax(x, dim=1)
-
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 if(args.model=="SGC"):

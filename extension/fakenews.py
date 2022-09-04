@@ -28,7 +28,6 @@ train_loader = DataLoader(train_dataset, batch_size=128, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=128, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False)
 
-
 class Net(torch.nn.Module):
     def __init__(self, model, in_channels, hidden_channels, out_channels,
                  concat=False):
@@ -70,7 +69,6 @@ model = Net(args.model, train_dataset.num_features, 128,
             train_dataset.num_classes, concat=True).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.01)
 
-
 def train():
     model.train()
 
@@ -85,7 +83,6 @@ def train():
         total_loss += float(loss) * data.num_graphs
 
     return total_loss / len(train_loader.dataset)
-
 
 @torch.no_grad()
 def test(loader):
